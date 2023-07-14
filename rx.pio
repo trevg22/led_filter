@@ -1,0 +1,39 @@
+.program recieve
+
+.wrap_target
+set x,2
+wait 1 pin 0
+
+start:
+in pins,1
+jmp x-- start
+
+push block
+.wrap
+
+
+
+/*
+.wrap_target
+	set x,23
+	set y,1
+
+
+start:
+	wait 1 pin 0 [4]
+	jmp pin one_bit
+
+zero_bit:
+	in y,1
+	jmp x-- start
+	jmp push_block
+
+one_bit:
+	in null,1
+	jmp x-- start
+
+push_block:
+	push block 
+
+.wrap
+*/
