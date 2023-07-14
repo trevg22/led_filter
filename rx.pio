@@ -1,14 +1,14 @@
 .program recieve
 
 .wrap_target
-set x,2
+set x,3
 wait 1 pin 0
 
 start:
 in pins,1
 jmp x-- start
 
-push block
+push block 
 .wrap
 
 

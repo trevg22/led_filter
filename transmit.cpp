@@ -20,11 +20,11 @@ uint32_t colours[LED_COUNT] =
 int main(){
 
 transmitter trans;
-sleep_us(50);
+sleep_us(150);
 while(true)
     {
         uint32_t first_colour = colours[1];
-    first_colour =16777215 ;
+    first_colour =3;
         trans.transmit(first_colour);
         sleep_us(200);
     }

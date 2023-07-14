@@ -23,10 +23,24 @@ recieve_program_init(inPio, inSm, inOffset, INPUT_PIN);
 gpio_put(INPUT_PIN, false);
 pio_sm_set_enabled(inPio, inSm, true);
 
+channel_config_set_transfer_data_size(&dma_ch1,DMA_SIZE_32);
+  channel_config_set_read_increment(&dma_ch1,false);
+  channel_config_set_write_increment(&dma_ch1,false);
+  channel_config_set_dreq(&dma_ch1,DREQ_PIO1_RX0);
+  dma_channel_configure(inDmaIndex,&dma_ch1,&data,&inPio->rxf[inSm],1,false); 
+  dma_channel_set_irq0_enabled(inDmaIndex, true);
+  irq_set_enabled(DMA_IRQ_0,true);
+  dma_channel_start(inDmaIndex);
 }
 
-bool reciever::ReadSamples(uint32_t &data)
+bool reciever::SamplesReady()
 {
-    data= pio_sm_get_blocking(inPio, inSm);
-    return data? true:false;
+  return dma_channel_get_irq0_status(inDmaIndex);
+}
+uint32_t reciever::GetSamples()
+{
+   //dma_channel_acknowledge_irq0(inDmaIndex); 
+    //data= pio_sm_get_blocking(inPio, inSm);
+    //pio_sm_clear_fifos(inPio,inSm);
+    return data;
 }
