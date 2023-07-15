@@ -1,0 +1,9 @@
+.program recieve
+
+set x,1
+set y,1
+
+.wrap_target
+in x,1
+in y,1
+.wrap
